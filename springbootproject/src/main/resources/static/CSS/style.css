@@ -1,12 +1,12 @@
 body{
   background:#dcdcdc;
+  height: 100%;
 }
 
 .bg-primary{
  background: #009688 !important;
 
 }
-
 .banner{
 width:100%;
 height:95vh;
@@ -15,7 +15,13 @@ background-size:cover;
 color:white;
 }
 
+
 .mycard{
     padding: 60px;
     background:white;
+}
+
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
 }

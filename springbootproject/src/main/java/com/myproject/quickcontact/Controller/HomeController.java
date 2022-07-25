@@ -4,6 +4,7 @@ import com.myproject.quickcontact.Entities.User;
 import com.myproject.quickcontact.Helper.Message;
 import com.myproject.quickcontact.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +14,13 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
     @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
     private UserRepository userRepository;
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String home(Model model){
 
-        model.addAttribute("title","Home - QucikContact");
+        model.addAttribute("title","Home - QuickContact");
         return "home";
     }
 
@@ -47,6 +50,9 @@ public class HomeController {
           }
           user.setRole("ROLE_USER");
           user.setEnabled(true);
+          user.setImageUrl("banner.jpg");
+          user.setPassword(passwordEncoder.encode(user.getPassword()));
+          user.setEnabled(true);
           User result1 = this.userRepository.save(user);
           System.out.println(result1);
           session.setAttribute("message",new Message("Successfully Registered!!","alert-success"));
@@ -61,5 +67,13 @@ public class HomeController {
           return "signup";
       }
 
+    }
+
+    //handler for custom login
+    @RequestMapping("/signin")
+    public String customLogic(Model model){
+
+        model.addAttribute("title","login page");
+        return "login";
     }
 }
