@@ -35,6 +35,8 @@ public class HomeController {
     public String Signup(Model model){
 
         model.addAttribute("title","Register - QucikContact");
+        //we are sending blank user, and when we enter new user then it will come here
+
         model.addAttribute("user",new User());
         return "signup";
     }
@@ -44,8 +46,7 @@ public class HomeController {
     public String registerUser(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model,HttpSession session){
       try {
           if (!agreement) {
-              System.out.println("You have not agreed the terms and conditions");
-             throw new Exception("You have not agreed the terms and conditions");
+             throw new Exception("You have not agreed the terms and conditions!");
 
           }
           user.setRole("ROLE_USER");
@@ -57,6 +58,7 @@ public class HomeController {
           System.out.println(result1);
           session.setAttribute("message",new Message("Successfully Registered!!","alert-success"));
 
+          //sending data from controller to view
           model.addAttribute("user", new User());
           return "signup";
       }

@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
        if (user==null){
            throw new UsernameNotFoundException("Could not found user !!");
        }
-
+        System.out.println(username);
        CustomUserDetails customUserDetails = new CustomUserDetails(user);
         return customUserDetails;
     }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>this is home page</title>
-<!--    <link rel="stylesheet" href="../static/CSS/login.css">-->
+    <!--    <link rel="stylesheet" href="../static/CSS/login.css">-->
 </head>
 <body>
 <section>
@@ -24,18 +24,20 @@
                         <img class="mx-auto" style="width: 70px" th:src="@{image/welcome.png}" alt="">
                     </div>
                     <h1 class="text-center">Welcome Back!!</h1>
-                    <form>
+                    <form id="Login-form" class="form" th:action="@{/dologin}" action="#" method="post">
+                        <div th:if="${param.error}" class="alert alert-danger">
+                            Invalid Credentials
+                        </div>
                         <!--name field-->
                         <div class="form-group">
-                            <label for="name_field" class="form-label">User Name</label>
+                            <label for="username" class="form-label">User Name</label>
                             <input type="text"
-                                   name="name"
+                                   name="username"
+                                   id="username"
                                    class="form-control"
-                                   id="name_field"
-                                   aria-describedby="emailHelp"
                                    placeholder="Enter here"
                                    required>
-<!--                                   th:value="${user.name}"-->
+                            <!--                                   th:value="${user.name}"-->
 
                         </div>
 
@@ -44,12 +46,11 @@
 
                         <!--password field-->
                         <div class="form-group">
-                            <label for="name_field" class="form-label">Your Password</label>
+                            <label for="password" class="form-label">Your Password</label>
                             <input type="password"
                                    name="password"
+                                   id="password"
                                    class="form-control"
-                                   id="password_field"
-                                   aria-describedby="emailHelp"
                                    placeholder="Enter here"
                                    required
                             >
